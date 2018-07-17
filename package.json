@@ -1,0 +1,31 @@
+{
+  "name": "liberta",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@coreui/coreui": "^2.0.4",
+    "@coreui/react": "^2.0.4",
+    "@nivo/bar": "^0.42.1",
+    "@nivo/line": "^0.42.1",
+    "@nivo/pie": "^0.42.1",
+    "ajv": "^6.5.2",
+    "flag-icon-css": "^3.0.0",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.3.1",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "1.1.4",
+    "reactstrap": "^6.3.0",
+    "recharts": "^1.0.1",
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.3.0",
+    "simple-line-icons": "^2.4.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
