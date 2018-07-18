@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from '../react';
 import { ResponsivePie } from '@nivo/pie';
 
 export class PieChart extends Component {

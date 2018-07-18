@@ -19,12 +19,14 @@ import navigation from './_nav';
 import routes from './routes';
 
 import './App.css';
+import HeaderBar from './components/header/HeaderBar';
 
 export class Home extends Component {
   render() {
     return (
       <div className="app">
         <AppHeader fixed>
+          <HeaderBar />
         </AppHeader>
         <div className="app-body">
           <AppSidebar fixed display="lg">
