@@ -72,28 +72,36 @@ export class DashboardResult extends Component {
                 </Row>
                 <Row>
                     <Col xs="12" sm="6" lg="6">
-                        <Chart
-                            id={"chart1"}
-                            columns={data}
-                            chartType={"line"}
-                            groups={['A', 'B', 'C', 'D', 'E', 'F', 'G']}
-                            lineStyle={'area-spline'}
-                            timeseries={{ format: '%d/%m', dates: ['2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04', '2013-01-05', '2013-01-06'] }}
-                        />
+                        <Card className="text-white">
+                            <CardBody className="pb-0">
+                                <Chart
+                                    id={"chart1"}
+                                    columns={data}
+                                    chartType={"line"}
+                                    groups={['A', 'B', 'C', 'D', 'E', 'F', 'G']}
+                                    lineStyle={'area-spline'}
+                                    timeseries={{ format: '%d/%m', dates: ['2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04', '2013-01-05', '2013-01-06'] }}
+                                />
+                            </CardBody>
+                        </Card>
                     </Col>
                     <Col xs="12" sm="6" lg="6">
-                        <Chart
-                            id={"chart2"}
-                            json={data2}
-                            keys={{ x: 'name', value: ['upload', 'download'] }}
-                            chartType={"bar"}
-                            rotated={true}
-                        /*  combination={{
-                             A: 'spline',
-                             B: 'line',
-                             C: 'area',
-                         }} */
-                        />
+                        <Card className="text-white">
+                            <CardBody className="pb-0">
+                                <Chart
+                                    id={"chart2"}
+                                    json={data2}
+                                    keys={{ x: 'name', value: ['upload', 'download'] }}
+                                    chartType={"bar"}
+                                    rotated={true}
+                                /*  combination={{
+                                     A: 'spline',
+                                     B: 'line',
+                                     C: 'area',
+                                 }} */
+                                />
+                            </CardBody>
+                        </Card>
                     </Col>
                 </Row>
             </div>
