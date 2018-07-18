@@ -87,6 +87,7 @@ export class DashboardResult extends Component {
                             json={data2}
                             keys={{ x: 'name', value: ['upload', 'download'] }}
                             chartType={"bar"}
+                            rotated={true}
                         /*  combination={{
                              A: 'spline',
                              B: 'line',

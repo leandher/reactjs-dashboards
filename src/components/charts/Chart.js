@@ -14,7 +14,7 @@ export default class Chart extends Component {
 
     updateChart() {
         const { id, columns, chartType, lineStyle, timeseries, groups, title, combination, colorPattern,
-            onclickCallBack, showLabel, json, keys } = this.props;
+            onclickCallBack, showLabel, json, keys, rotated, inverted } = this.props;
 
         let option = {
             bindto: '#' + id,
@@ -30,14 +30,18 @@ export default class Chart extends Component {
             donut: (title ? { title: title, label: { show: showLabel } } : null),
             pie: { label: { show: showLabel } },
             gauge: { label: { show: showLabel } },
-            axis: (timeseries ? {
+            axis: {
                 x: {
-                    type: 'timeseries',
+                    type: (timeseries ? 'timeseries' : 'category'),
                     tick: {
-                        format: timeseries.format
-                    }
+                        format: (timeseries ? timeseries.format : null),
+                    },
+                },
+                rotated: rotated,
+                y: {
+                    inverted: inverted
                 }
-            } : { x: { type: 'category' } }),
+            },
             color: (colorPattern ? { pattern: colorPattern } : null)
         }
 
@@ -80,7 +84,9 @@ Chart.propTypes = {
     combination: PropTypes.object,
     colorPattern: PropTypes.array,
     onclickCallBack: PropTypes.func,
-    showLabel: PropTypes.bool
+    showLabel: PropTypes.bool,
+    rotated: PropTypes.bool,
+    inverted: PropTypes.bool
 };
 
 Chart.defaultProps = {
@@ -95,7 +101,9 @@ Chart.defaultProps = {
     combination: null,
     colorPattern: null,
     onclickCallBack: () => { },
-    showLabel: true
+    showLabel: true,
+    rotated: false,
+    inverted: false
 };
 
 /* 
