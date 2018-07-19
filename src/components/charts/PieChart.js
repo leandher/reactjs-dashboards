@@ -5,11 +5,12 @@ import colors from '../../colors';
 
 export default class PieChart extends Component {
     render() {
-        const { data, options, multicolor, label } = this.props;
+        const { data, options, multicolor, label, onclick } = this.props;
 
         return (
             <ResponsiveContainer minHeight={300}>
-                <PieChartContainer>
+                <PieChartContainer
+                    onclick={onclick}>
                     {
                         data.map((element, index) => {
                             return (
@@ -52,11 +53,13 @@ PieChart.propTypes = {
         })
     ).isRequired,
     multicolor: PropTypes.bool,
-    label: PropTypes.bool
+    label: PropTypes.bool,
+    onclick: PropTypes.func
 };
 
 PieChart.defaultProps = {
     options: [],
     multicolor: false,
-    label: true
+    label: true,
+    onclick: () => { }
 }

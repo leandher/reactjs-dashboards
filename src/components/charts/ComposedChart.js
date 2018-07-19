@@ -67,12 +67,13 @@ export default class ComposedChart extends Component {
     }
 
     render() {
-        const { data, options, dataKey, orientation } = this.props;
+        const { data, options, dataKey, orientation, onclick } = this.props;
         return (
             <ResponsiveContainer minHeight={300}>
                 <ComposedChartContainer
                     data={data}
                     layout={orientation}
+                    onclick={onclick}
                 >
                     <XAxis dataKey={dataKey} />
                     <YAxis />
@@ -100,12 +101,14 @@ ComposedChart.propTypes = {
             type: PropTypes.string // line, area, bar
         })
     ).isRequired,
-    orientation: PropTypes.string
+    orientation: PropTypes.string,
+    onclick: PropTypes.func
 };
 
 ComposedChart.defaultProps = {
     options: [{
         type: 'line'
     }],
-    orientation: 'horizontal' // vertical
+    orientation: 'horizontal', // vertical
+    onclick: () => { }
 }

@@ -10,13 +10,14 @@ export default class AreaChart extends Component {
     };
 
     render() {
-        const { data, keys, dataKey, stacked, percent, orientation } = this.props;
+        const { data, keys, dataKey, stacked, percent, orientation, onclick } = this.props;
 
         return (
             <ResponsiveContainer minHeight={300}>
                 <AreaChartContainer
                     data={data}
                     layout={orientation}
+                    onclick={onclick}
                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey={dataKey} />
@@ -49,11 +50,13 @@ AreaChart.propTypes = {
     dataKey: PropTypes.string.isRequired,
     stacked: PropTypes.bool,
     percent: PropTypes.bool,
-    orientation: PropTypes.string
+    orientation: PropTypes.string,
+    onclick: PropTypes.func
 };
 
 AreaChart.defaultProps = {
     stacked: false,
     percent: false,
-    orientation: 'horizontal' // vertical
+    orientation: 'horizontal', // vertical
+    onclick: () => { }
 }
