@@ -1,35 +1,56 @@
 import React, { Component } from 'react';
-import { AreaChart as AreaChartContainer, Area, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import PropTypes from 'prop-types';
+import { AreaChart as AreaChartContainer, Area, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import colors from '../../colors';
 
-export class AreaChart extends Component {
+export default class AreaChart extends Component {
+
+    toPercent = (decimal, fixed = 0) => {
+        return `${(decimal/10).toFixed(fixed)}%`;
+    };
 
     render() {
-        /* Data = [{ x:value, ...yValues }, ...] */
-        const { data, keys, activeDot } = this.props;
-        const x = keys.filter(key => key === 'x')[0];
+        const { data, keys, dataKey, stacked, percent } = this.props;
 
-        if (data.length > 0 && keys.length > 0) {
-
-            return (
-                <ResponsiveContainer width="100%" height={300}>
-                    <AreaChartContainer data={data}
-                        margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey={x} />
-                        <YAxis />
-                        <Tooltip />
-                        {
-                            keys.slice(1).map((key, index) => {
-                                return (
-                                    <Area key={key} type='monotone' dataKey={key} stackId="1" activeDot={activeDot} />
-                                )
-                            })
-                        }
-                    </AreaChartContainer>
-                </ResponsiveContainer>
-            );
-        } else {
-            return ('');
-        }
+        return (
+            <ResponsiveContainer minHeight={300}>
+                <AreaChartContainer
+                    data={data}
+                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey={dataKey} />
+                    <YAxis  {...(percent ? { tickFormatter: this.toPercent } : {})} />
+                    <Tooltip />
+                    <Legend />
+                    {
+                        keys.map((key, index) => {
+                            return (
+                                <Area
+                                    key={key}
+                                    type="monotone"
+                                    dataKey={key}
+                                    fill={colors[index]}
+                                    stroke={colors[index]}
+                                    {...(stacked ? { stackId: "1" } : {})}
+                                />
+                            )
+                        })
+                    }
+                </AreaChartContainer>
+            </ResponsiveContainer>
+        );
     }
+};
+
+AreaChart.propTypes = {
+    data: PropTypes.array.isRequired,
+    keys: PropTypes.array.isRequired,
+    dataKey: PropTypes.string.isRequired,
+    stacked: PropTypes.bool,
+    percent: PropTypes.bool
+};
+
+AreaChart.defaultProps = {
+    stacked: false,
+    percent: false
 }

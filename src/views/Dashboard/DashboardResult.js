@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Card, CardBody, Col, Row } from 'reactstrap';
-import { BarChart, LineChart, PieChart } from '../../components/charts/index';
+import { BarChart, LineChart, PieChart, AreaChart } from '../../components/charts/index';
 export class DashboardResult extends Component {
 
     constructor() {
@@ -100,7 +100,7 @@ export class DashboardResult extends Component {
                                 <PieChart
                                     data={pie}
                                     options={[{ key: 'value' }]}
-                                    multicolor={true}
+                                    multicolor
                                 />
                             </CardBody>
                         </Card>
@@ -108,7 +108,12 @@ export class DashboardResult extends Component {
                     <Col xs="12" sm="6" lg="6">
                         <Card>
                             <CardBody className="pb-0">
-
+                                <AreaChart
+                                    data={data}
+                                    dataKey={'name'}
+                                    keys={['upload', 'download', 'total']}
+                                    stacked
+                                />
                             </CardBody>
                         </Card>
                     </Col>

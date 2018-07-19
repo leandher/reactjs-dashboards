@@ -5,7 +5,7 @@ import colors from '../../colors';
 
 export default class LineChart extends Component {
     render() {
-        const { data, keys, dataKey, isDashed } = this.props;
+        const { data, keys, dataKey, dashed } = this.props;
 
         return (
             <ResponsiveContainer minHeight={300}>
@@ -26,7 +26,7 @@ export default class LineChart extends Component {
                                     dataKey={key}
                                     fill={colors[index]}
                                     stroke={colors[index]}
-                                    {...(isDashed ? { strokeDasharray: "5 5" } : {})}
+                                    {...(dashed ? { strokeDasharray: "5 5" } : {})}
                                 />
                             )
                         })
@@ -41,9 +41,9 @@ LineChart.propTypes = {
     data: PropTypes.array.isRequired,
     keys: PropTypes.array.isRequired,
     dataKey: PropTypes.string.isRequired,
-    isDashed: PropTypes.bool
+    dashed: PropTypes.bool
 };
 
 LineChart.defaultProps = {
-    isDashed: false
+    dashed: false
 }
