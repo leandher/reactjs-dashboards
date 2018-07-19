@@ -47,9 +47,9 @@ export default class LabelChart extends Component {
     }
 
     render() {
-        const { title, value, type } = this.props;
+        const { title, value, type, onclick } = this.props;
         return (
-            <div>
+            <div onclick={onclick}>
                 <div className="text-md-right text-muted">
                     {title}
                 </div>
@@ -64,11 +64,13 @@ export default class LabelChart extends Component {
 LabelChart.propTypes = {
     title: PropTypes.string,
     value: PropTypes.number,
-    type: PropTypes.string
+    type: PropTypes.string,
+    onclick: PropTypes.func
 };
 
 LabelChart.defaultProps = {
     title: '',
     value: 0,
-    type: ''
+    type: '',
+    onclick: () => {}
 }
