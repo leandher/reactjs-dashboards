@@ -4,9 +4,3 @@
 @import '~font-awesome/css/font-awesome.min.css';
 @import '~simple-line-icons/css/simple-line-icons.css';
 @import '~c3/c3.min.css';
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-}
