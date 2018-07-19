@@ -1,4 +1,4 @@
-import { DashboardResult } from "./views/Dashboard/DashboardResult";
+import { DashboardResult } from "./views/index";
 import { Home } from "./Home";
 
 const routes = [

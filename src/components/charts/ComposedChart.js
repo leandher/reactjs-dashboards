@@ -53,24 +53,27 @@ export default class ComposedChart extends Component {
         switch (option.type) {
             case 'area':
                 return this.renderArea(option.key, color);
-                
+
             case 'bar':
                 return this.renderBar(option.key, color);
-                
+
             case 'line':
                 return this.renderLine(option.key, color);
-                
+
             default:
                 return this.renderLine(option.key, color);
-                
+
         }
     }
 
     render() {
-        const { data, options, dataKey } = this.props;
+        const { data, options, dataKey, orientation } = this.props;
         return (
             <ResponsiveContainer minHeight={300}>
-                <ComposedChartContainer data={data}>
+                <ComposedChartContainer
+                    data={data}
+                    layout={orientation}
+                >
                     <XAxis dataKey={dataKey} />
                     <YAxis />
                     <Tooltip />
@@ -94,13 +97,15 @@ ComposedChart.propTypes = {
     options: PropTypes.arrayOf(
         PropTypes.shape({
             key: PropTypes.string.isRequired,
-            type: PropTypes.string
+            type: PropTypes.string // line, area, bar
         })
-    ).isRequired
+    ).isRequired,
+    orientation: PropTypes.string
 };
 
 ComposedChart.defaultProps = {
     options: [{
         type: 'line'
-    }]
+    }],
+    orientation: 'horizontal' // vertical
 }

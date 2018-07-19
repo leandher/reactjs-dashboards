@@ -5,12 +5,13 @@ import colors from '../../colors';
 
 export default class LineChart extends Component {
     render() {
-        const { data, keys, dataKey, dashed } = this.props;
+        const { data, keys, dataKey, dashed, orientation } = this.props;
 
         return (
             <ResponsiveContainer minHeight={300}>
                 <LineChartContainer
                     data={data}
+                    layout={orientation}
                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey={dataKey} />
@@ -41,9 +42,11 @@ LineChart.propTypes = {
     data: PropTypes.array.isRequired,
     keys: PropTypes.array.isRequired,
     dataKey: PropTypes.string.isRequired,
-    dashed: PropTypes.bool
+    dashed: PropTypes.bool,
+    orientation: PropTypes.string
 };
 
 LineChart.defaultProps = {
-    dashed: false
+    dashed: false,
+    orientation: 'horizontal' // vertical
 }

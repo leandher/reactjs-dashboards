@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Card, CardBody, Col, Row } from 'reactstrap';
-import { BarChart, LineChart, PieChart, AreaChart, ComposedChart } from '../../components/charts/index';
+import { BarChart, LineChart, PieChart, AreaChart, ComposedChart } from '../../components/index';
+import Currency from 'react-currency-formatter';
 
-export class DashboardResult extends Component {
+export default class DashboardResult extends Component {
 
     constructor() {
         super();
@@ -35,37 +36,77 @@ export class DashboardResult extends Component {
             <div className="animated fadeIn">
                 <Row>
                     <Col xs="12" sm="6" lg="3">
-                        <Card className="text-white bg-info">
+                        <Card>
                             <CardBody className="pb-0">
-                                <div className="text-value">9.823</div>
-                                <div>Members online</div>
+                                <div>
+                                    Faturamento
+                                </div>
+                                <div className="text-value">
+                                    <Currency
+                                        quantity={21394999}
+                                        currency="BRL"
+                                        decimal=","
+                                        group="."
+                                        locale="pt_BR"
+                                    />
+                                </div>
                             </CardBody>
                         </Card>
                     </Col>
 
                     <Col xs="12" sm="6" lg="3">
-                        <Card className="text-white bg-primary">
+                        <Card>
                             <CardBody className="pb-0">
-                                <div className="text-value">9.823</div>
-                                <div>Members online</div>
+                                <div>
+                                    EBITDA
+                                </div>
+                                <div className="text-value">
+                                    <Currency
+                                        quantity={883829101}
+                                        currency="BRL"
+                                        decimal=","
+                                        group="."
+                                        locale="pt_BR"
+                                    />
+                                </div>
                             </CardBody>
                         </Card>
                     </Col>
 
                     <Col xs="12" sm="6" lg="3">
-                        <Card className="text-white bg-warning">
+                        <Card>
                             <CardBody className="pb-0">
-                                <div className="text-value">9.823</div>
-                                <div>Members online</div>
+                                <div>
+
+                                </div>
+                                <div className="text-value">
+                                    <Currency
+                                        quantity={32129101}
+                                        currency="BRL"
+                                        decimal=","
+                                        group="."
+                                        locale="pt_BR"
+                                    />
+                                </div>
                             </CardBody>
                         </Card>
                     </Col>
 
                     <Col xs="12" sm="6" lg="3">
-                        <Card className="text-white bg-danger">
+                        <Card>
                             <CardBody className="pb-0">
-                                <div className="text-value">9.823</div>
-                                <div>Members online</div>
+                                <div>
+
+                                </div>
+                                <div className="text-value">
+                                    <Currency
+                                        quantity={4433113123}
+                                        currency="BRL"
+                                        decimal=","
+                                        group="."
+                                        locale="pt_BR"
+                                    />
+                                </div>
                             </CardBody>
                         </Card>
                     </Col>
@@ -130,7 +171,7 @@ export class DashboardResult extends Component {
                                         { key: 'total', type: 'area' },
                                         { key: 'upload', type: 'line' },
                                         { key: 'download', type: 'bar' }
-                                        ]}
+                                    ]}
                                 />
                             </CardBody>
                         </Card>

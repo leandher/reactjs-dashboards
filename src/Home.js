@@ -19,7 +19,7 @@ import navigation from './_nav';
 import routes from './routes';
 
 import './App.css';
-import HeaderBar from './components/header/HeaderBar';
+import { HeaderBar } from './components/index';
 
 export class Home extends Component {
   render() {

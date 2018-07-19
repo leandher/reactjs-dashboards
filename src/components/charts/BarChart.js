@@ -5,12 +5,13 @@ import colors from '../../colors';
 
 export default class BarChart extends Component {
     render() {
-        const { data, keys, dataKey } = this.props;
+        const { data, keys, dataKey, orientation } = this.props;
 
         return (
             <ResponsiveContainer minHeight={300}>
                 <BarChartContainer
                     data={data}
+                    layout={orientation}
                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey={dataKey} />
@@ -39,10 +40,11 @@ export default class BarChart extends Component {
 BarChart.propTypes = {
     data: PropTypes.array.isRequired,
     keys: PropTypes.array.isRequired,
-    dataKey: PropTypes.string.isRequired
+    dataKey: PropTypes.string.isRequired,
+    orientation: PropTypes.string
 
 };
 
 BarChart.defaultProps = {
-
+    orientation: 'horizontal' // vertical
 }

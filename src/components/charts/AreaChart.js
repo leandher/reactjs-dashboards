@@ -6,16 +6,17 @@ import colors from '../../colors';
 export default class AreaChart extends Component {
 
     toPercent = (decimal, fixed = 0) => {
-        return `${(decimal/10).toFixed(fixed)}%`;
+        return `${(decimal / 10).toFixed(fixed)}%`;
     };
 
     render() {
-        const { data, keys, dataKey, stacked, percent } = this.props;
+        const { data, keys, dataKey, stacked, percent, orientation } = this.props;
 
         return (
             <ResponsiveContainer minHeight={300}>
                 <AreaChartContainer
                     data={data}
+                    layout={orientation}
                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey={dataKey} />
@@ -47,10 +48,12 @@ AreaChart.propTypes = {
     keys: PropTypes.array.isRequired,
     dataKey: PropTypes.string.isRequired,
     stacked: PropTypes.bool,
-    percent: PropTypes.bool
+    percent: PropTypes.bool,
+    orientation: PropTypes.string
 };
 
 AreaChart.defaultProps = {
     stacked: false,
-    percent: false
+    percent: false,
+    orientation: 'horizontal' // vertical
 }
