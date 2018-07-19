@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Card, CardBody, Col, Row } from 'reactstrap';
-import { BarChart, LineChart, PieChart, AreaChart } from '../../components/charts/index';
+import { BarChart, LineChart, PieChart, AreaChart, ComposedChart } from '../../components/charts/index';
+
 export class DashboardResult extends Component {
 
     constructor() {
@@ -114,6 +115,29 @@ export class DashboardResult extends Component {
                                     keys={['upload', 'download', 'total']}
                                     stacked
                                 />
+                            </CardBody>
+                        </Card>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs="12" sm="6" lg="6">
+                        <Card>
+                            <CardBody className="pb-0 pl-0" >
+                                <ComposedChart
+                                    data={data}
+                                    dataKey={'name'}
+                                    options={[
+                                        { key: 'total', type: 'area' },
+                                        { key: 'upload', type: 'line' },
+                                        { key: 'download', type: 'bar' }
+                                        ]}
+                                />
+                            </CardBody>
+                        </Card>
+                    </Col>
+                    <Col xs="12" sm="6" lg="6">
+                        <Card>
+                            <CardBody className="pb-0">
                             </CardBody>
                         </Card>
                     </Col>

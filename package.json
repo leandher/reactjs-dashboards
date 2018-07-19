@@ -8,6 +8,7 @@
     "@nivo/bar": "^0.42.1",
     "@nivo/line": "^0.42.1",
     "@nivo/pie": "^0.42.1",
+    "@types/recharts": "^1.0.24",
     "ajv": "^6.5.2",
     "c3": "^0.6.5",
     "color-scheme": "^1.0.1",
