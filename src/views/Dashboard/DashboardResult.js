@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Card, CardBody, Col, Row } from 'reactstrap';
-import LineChart from '../../components/charts/lib/LineChart';
+import { BarChart, LineChart } from '../../components/charts/index';
 export class DashboardResult extends Component {
 
     constructor() {
@@ -75,7 +75,11 @@ export class DashboardResult extends Component {
                     <Col xs="12" sm="6" lg="6">
                         <Card>
                             <CardBody className="pb-0">
-
+                                <BarChart
+                                    data={data}
+                                    dataKey={'name'}
+                                    keys={['upload', 'download', 'total']}
+                                />
                             </CardBody>
                         </Card>
                     </Col>

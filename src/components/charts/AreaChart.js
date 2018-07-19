@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AreaChart as AreaDashBoard, Area, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import { AreaChart as AreaChartContainer, Area, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
 export class AreaChart extends Component {
 
@@ -12,7 +12,7 @@ export class AreaChart extends Component {
 
             return (
                 <ResponsiveContainer width="100%" height={300}>
-                    <AreaDashBoard data={data}
+                    <AreaChartContainer data={data}
                         margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey={x} />
@@ -25,7 +25,7 @@ export class AreaChart extends Component {
                                 )
                             })
                         }
-                    </AreaDashBoard>
+                    </AreaChartContainer>
                 </ResponsiveContainer>
             );
         } else {

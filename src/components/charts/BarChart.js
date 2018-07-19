@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
+import { BarChart as BarChartContainer, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, Legend } from 'recharts';
 import PropTypes from 'prop-types';
-import { LineChart as LineChartContainer, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, Legend } from 'recharts';
-import colors from '../../../colors';
+import colors from '../../colors';
 
-export default class LineChart extends Component {
+export default class BarChart extends Component {
     render() {
-        const { data, keys, dataKey, isDashed } = this.props;
+        const { data, keys, dataKey } = this.props;
 
         return (
             <ResponsiveContainer minHeight={300}>
-                <LineChartContainer
+                <BarChartContainer
                     data={data}
                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
                     <CartesianGrid strokeDasharray="3 3" />
@@ -20,30 +20,29 @@ export default class LineChart extends Component {
                     {
                         keys.map((key, index) => {
                             return (
-                                <Line
+                                <Bar
                                     key={key}
                                     type="monotone"
                                     dataKey={key}
                                     fill={colors[index]}
                                     stroke={colors[index]}
-                                    {...(isDashed ? { strokeDasharray: "5 5" } : {})}
                                 />
                             )
                         })
                     }
-                </LineChartContainer>
+                </BarChartContainer>
             </ResponsiveContainer>
         );
     }
 };
 
-LineChart.propTypes = {
+BarChart.propTypes = {
     data: PropTypes.array.isRequired,
     keys: PropTypes.array.isRequired,
-    dataKey: PropTypes.string.isRequired,
-    isDashed: PropTypes.bool
+    dataKey: PropTypes.string.isRequired
+
 };
 
-LineChart.defaultProps = {
-    isDashed: false
+BarChart.defaultProps = {
+
 }
