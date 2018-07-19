@@ -1,4 +1,4 @@
-import { AreaChart, PieChart, LineChart, BarChart, ComposedChart } from './charts/index';
+import { AreaChart, PieChart, LineChart, BarChart, ComposedChart, LabelChart } from './charts/index';
 import { HeaderBar } from './header/index';
 
-export { AreaChart, PieChart, LineChart, BarChart, ComposedChart, HeaderBar }
+export { AreaChart, PieChart, LineChart, BarChart, ComposedChart, LabelChart, HeaderBar }

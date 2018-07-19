@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Card, CardBody, Col, Row } from 'reactstrap';
 import { BarChart, LineChart, PieChart, AreaChart, ComposedChart, LabelChart } from '../../components/index';
+import { WidthProvider, Responsive } from "react-grid-layout";
+const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
-export default class DashboardResult extends Component {
+export default class DashboardEditable extends Component {
 
     constructor() {
         super();
@@ -33,8 +35,8 @@ export default class DashboardResult extends Component {
         const { data, pie } = this.state;
         return (
             <div className="animated fadeIn">
-                <Row>
-                    <Col xs="12" sm="6" lg="3">
+                <ResponsiveReactGridLayout>
+                    <div key="1" data-grid={{ w: 2, h: 3, x: 0, y: 0, minW: 2, minH: 3 }}>
                         <Card>
                             <CardBody className="pb-0">
                                 <LabelChart
@@ -44,9 +46,9 @@ export default class DashboardResult extends Component {
                                 />
                             </CardBody>
                         </Card>
-                    </Col>
+                    </div>
 
-                    <Col xs="12" sm="6" lg="3">
+                    <div key="2" data-grid={{ w: 2, h: 3, x: 0, y: 0, minW: 2, minH: 3 }}>
                         <Card>
                             <CardBody className="pb-0">
                                 <LabelChart
@@ -56,9 +58,9 @@ export default class DashboardResult extends Component {
                                 />
                             </CardBody>
                         </Card>
-                    </Col>
+                    </div>
 
-                    <Col xs="12" sm="6" lg="3">
+                    <div key="3" data-grid={{ w: 2, h: 3, x: 0, y: 0, minW: 2, minH: 3 }}>
                         <Card>
                             <CardBody className="pb-0">
                                 <LabelChart
@@ -68,9 +70,9 @@ export default class DashboardResult extends Component {
                                 />
                             </CardBody>
                         </Card>
-                    </Col>
+                    </div>
 
-                    <Col xs="12" sm="6" lg="3">
+                    <div key="4" data-grid={{ w: 2, h: 3, x: 0, y: 0, minW: 2, minH: 3 }}>
                         <Card>
                             <CardBody className="pb-0">
                                 <LabelChart
@@ -80,10 +82,9 @@ export default class DashboardResult extends Component {
                                 />
                             </CardBody>
                         </Card>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs="12" sm="6" lg="6">
+                    </div>
+
+                    <div key="5" data-grid={{ w: 2, h: 3, x: 0, y: 0, minW: 2, minH: 3 }}>
                         <Card>
                             <CardBody className="pb-0 pl-0" >
                                 <LineChart
@@ -93,8 +94,8 @@ export default class DashboardResult extends Component {
                                 />
                             </CardBody>
                         </Card>
-                    </Col>
-                    <Col xs="12" sm="6" lg="6">
+                    </div>
+                    <div key="6" data-grid={{ w: 2, h: 3, x: 0, y: 0, minW: 2, minH: 3 }}>
                         <Card>
                             <CardBody className="pb-0">
                                 <BarChart
@@ -104,10 +105,9 @@ export default class DashboardResult extends Component {
                                 />
                             </CardBody>
                         </Card>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs="12" sm="6" lg="6">
+                    </div>
+
+                    <div key="7" data-grid={{ w: 2, h: 3, x: 0, y: 0, minW: 2, minH: 3 }}>
                         <Card>
                             <CardBody className="pb-0 pl-0" >
                                 <PieChart
@@ -117,8 +117,8 @@ export default class DashboardResult extends Component {
                                 />
                             </CardBody>
                         </Card>
-                    </Col>
-                    <Col xs="12" sm="6" lg="6">
+                    </div>
+                    <div key="8" data-grid={{ w: 2, h: 3, x: 0, y: 0, minW: 2, minH: 3 }}>
                         <Card>
                             <CardBody className="pb-0">
                                 <AreaChart
@@ -129,10 +129,9 @@ export default class DashboardResult extends Component {
                                 />
                             </CardBody>
                         </Card>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs="12" sm="6" lg="6">
+                    </div>
+
+                    <div key="9" data-grid={{ w: 2, h: 3, x: 0, y: 0, minW: 2, minH: 3 }}>
                         <Card>
                             <CardBody className="pb-0 pl-0" >
                                 <ComposedChart
@@ -146,24 +145,16 @@ export default class DashboardResult extends Component {
                                 />
                             </CardBody>
                         </Card>
-                    </Col>
-                    <Col xs="12" sm="6" lg="6">
+                    </div>
+                    <div key="10" data-grid={{ w: 2, h: 3, x: 0, y: 0, minW: 2, minH: 3 }}>
                         <Card>
                             <CardBody className="pb-0">
-                            <ComposedChart
-                                    data={data}
-                                    dataKey={'name'}
-                                    options={[
-                                        { key: 'total', type: 'bar' },
-                                        { key: 'upload', type: 'line' },
-                                        { key: 'download', type: 'line' }
-                                    ]}
-                                />
                             </CardBody>
                         </Card>
-                    </Col>
-                </Row>
+                    </div>
+                </ResponsiveReactGridLayout>
             </div>
+
         );
     }
 }
