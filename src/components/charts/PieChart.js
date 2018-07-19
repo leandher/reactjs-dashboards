@@ -1,62 +1,62 @@
-import React, { Component } from '../react';
-import { ResponsivePie } from '@nivo/pie';
+import React, { Component } from 'react';
+import { PieChart as PieChartContainer, Pie, ResponsiveContainer, Tooltip, Legend, Cell } from 'recharts';
+import PropTypes from 'prop-types';
+import colors from '../../colors';
 
-export class PieChart extends Component {
-
+export default class PieChart extends Component {
     render() {
-        const { data, radius, cornerRadius, onClickCallBack } = this.props;
+        const { data, options, multicolor, label } = this.props;
+
         return (
-            <ResponsivePie
-                data={data}
-                margin={{
-                    "top": 40,
-                    "right": 80,
-                    "bottom": 80,
-                    "left": 80
-                }}
-                innerRadius={radius}
-                padAngle={0.7}
-                cornerRadius={cornerRadius}
-                colors="nivo"
-                colorBy="id"
-                borderWidth={1}
-                borderColor="inherit:darker(0.2)"
-                radialLabelsSkipAngle={10}
-                radialLabelsTextXOffset={6}
-                radialLabelsTextColor="#333333"
-                radialLabelsLinkOffset={0}
-                radialLabelsLinkDiagonalLength={16}
-                radialLabelsLinkHorizontalLength={24}
-                radialLabelsLinkStrokeWidth={1}
-                radialLabelsLinkColor="inherit"
-                slicesLabelsSkipAngle={10}
-                slicesLabelsTextColor="#333333"
-                animate={true}
-                motionStiffness={90}
-                motionDamping={15}
-                theme={{
-                    "tooltip": {
-                        "container": {
-                            "fontSize": "13px"
-                        }
-                    },
-                    "labels": {
-                        "textColor": "#555"
-                    }
-                }}
-                legends={[
+            <ResponsiveContainer minHeight={300}>
+                <PieChartContainer>
                     {
-                        "anchor": "bottom",
-                        "direction": "row",
-                        "translateY": 56,
-                        "itemWidth": 100,
-                        "itemHeight": 18,
-                        "symbolSize": 18,
-                        "symbolShape": "circle"
+                        data.map((element, index) => {
+                            return (
+                                <Pie
+                                    key={options[index].key}
+                                    data={element}
+                                    {...options[index]}
+                                    dataKey={options[index].key}
+                                    label={label}
+                                >
+                                    {
+                                        element.map((entry, index) => {
+                                            return (
+                                                <Cell
+                                                    key={entry.value}
+                                                    fill={(multicolor ? colors[index] : '#8884d8')}
+                                                />
+                                            )
+                                        })
+                                    }
+                                </Pie>
+                            )
+                        })
                     }
-                ]}
-                onClick={onClickCallBack}
-            />
+                    <Tooltip />
+                    {(multicolor ? <Legend /> : '')}
+                </PieChartContainer>
+            </ResponsiveContainer>
         );
     }
+};
+
+PieChart.propTypes = {
+    data: PropTypes.arrayOf(PropTypes.array).isRequired,
+    options: PropTypes.arrayOf(
+        PropTypes.shape({
+            key: PropTypes.string.isRequired,
+            outerRadius: PropTypes.number,
+            innerRadius: PropTypes.number
+        })
+    ).isRequired,
+    multicolor: PropTypes.bool,
+    label: PropTypes.bool
+};
+
+PieChart.defaultProps = {
+    options: [],
+    multicolor: false,
+    label: true
 }

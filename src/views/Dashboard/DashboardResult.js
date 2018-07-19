@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Card, CardBody, Col, Row } from 'reactstrap';
-import { BarChart, LineChart } from '../../components/charts/index';
+import { BarChart, LineChart, PieChart } from '../../components/charts/index';
 export class DashboardResult extends Component {
 
     constructor() {
         super();
-        this.state = { data: [] };
+        this.state = { data: [], pie: [] };
     }
 
     componentDidMount() {
@@ -16,11 +16,20 @@ export class DashboardResult extends Component {
             { name: 'www.site4.com', upload: 400, download: 100, total: 500 }
         ]
 
-        this.setState({ data: data });
+        const pie = [
+            [
+                { name: 'www.site1.com', value: 200 },
+                { name: 'www.site2.com', value: 100 },
+                { name: 'www.site3.com', value: 300 },
+                { name: 'www.site4.com', value: 400 }
+            ]
+        ]
+
+        this.setState({ data: data, pie: pie });
     }
 
     render() {
-        const { data } = this.state;
+        const { data, pie } = this.state;
         return (
             <div className="animated fadeIn">
                 <Row>
@@ -80,6 +89,26 @@ export class DashboardResult extends Component {
                                     dataKey={'name'}
                                     keys={['upload', 'download', 'total']}
                                 />
+                            </CardBody>
+                        </Card>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs="12" sm="6" lg="6">
+                        <Card>
+                            <CardBody className="pb-0 pl-0" >
+                                <PieChart
+                                    data={pie}
+                                    options={[{ key: 'value' }]}
+                                    multicolor={true}
+                                />
+                            </CardBody>
+                        </Card>
+                    </Col>
+                    <Col xs="12" sm="6" lg="6">
+                        <Card>
+                            <CardBody className="pb-0">
+
                             </CardBody>
                         </Card>
                     </Col>
