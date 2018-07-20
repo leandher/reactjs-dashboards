@@ -76,3 +76,8 @@ export default class TableChart extends Component {
         )
     }
 }
+
+TableChart.propTypes = {
+    data: PropTypes.array,
+    columns: PropTypes.array
+}

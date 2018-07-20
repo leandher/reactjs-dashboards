@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Card, CardBody, Col, Row } from 'reactstrap';
-import { BarChart, LineChart, PieChart, AreaChart, ComposedChart, LabelChart } from '../../components/index';
-import TableChart from '../../components/charts/TableChart';
+import { BarChart, LineChart, PieChart, AreaChart, ComposedChart, LabelChart, TableChart } from '../../components';
 
 export default class DashboardResult extends Component {
 
@@ -32,6 +31,7 @@ export default class DashboardResult extends Component {
 
     render() {
         const { data, pie } = this.state;
+        
         return (
             <div className="animated fadeIn">
                 <Row>
@@ -140,8 +140,8 @@ export default class DashboardResult extends Component {
                                     data={data}
                                     dataKey={'name'}
                                     options={[
-                                        { key: 'total', type: 'area' },
-                                        { key: 'upload', type: 'line' },
+                                        { key: 'total', type: 'line' },
+                                        { key: 'upload', type: 'area' },
                                         { key: 'download', type: 'bar' }
                                     ]}
                                 />
@@ -151,15 +151,6 @@ export default class DashboardResult extends Component {
                     <Col xs="12" sm="6" lg="6">
                         <Card>
                             <CardBody>
-                                {/*  <ComposedChart
-                                    data={data}
-                                    dataKey={'name'}
-                                    options={[
-                                        { key: 'total', type: 'bar' },
-                                        { key: 'upload', type: 'line' },
-                                        { key: 'download', type: 'line' }
-                                    ]}
-                                /> */}
                                 <TableChart
                                     data={data}
                                     columns={[

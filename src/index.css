@@ -5,6 +5,10 @@
 @import '~simple-line-icons/css/simple-line-icons.css';
 @import '~c3/c3.min.css';
 
-.react-grid-Container {
+.react-grid-Container, .react-grid-Viewport, .react-grid-Grid, .react-grid-Header {
     width: auto !important;
-}  
+} 
+
+.react-grid-HeaderRow, .react-grid-Canvas {
+    width: stretch !important;
+}
