@@ -8,6 +8,7 @@ export default class LabelChart extends Component {
         super();
         this.renderCurrency = this.renderCurrency.bind(this);
         this.renderPercentage = this.renderPercentage.bind(this);
+        this.renderProgressBar = this.renderProgressBar.bind(this);
         this.renderDefault = this.renderDefault.bind(this);
     }
 
@@ -29,6 +30,18 @@ export default class LabelChart extends Component {
         )
     }
 
+    renderProgressBar(value) {
+        const percentComplete = Number(value).toFixed(2) + '%';
+        return (
+            <div className="progress">
+                <div className="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                    aria-valuemax="100" style={{ width: percentComplete }}>
+                    {percentComplete}
+                </div>
+            </div>
+        )
+    }
+
     renderDefault(value) {
         return (
             <div>{value}</div>
@@ -41,6 +54,8 @@ export default class LabelChart extends Component {
                 return this.renderCurrency(value);
             case 'percentage':
                 return this.renderPercentage(value);
+            case 'progress':
+                return this.renderProgressBar(value);
             default:
                 return this.renderDefault(value);
         }
@@ -49,7 +64,7 @@ export default class LabelChart extends Component {
     render() {
         const { title, value, type, onclick } = this.props;
         return (
-            <div onclick={onclick}>
+            <div onClick={onclick}>
                 <div className="text-md-right text-muted">
                     {title}
                 </div>
@@ -72,5 +87,5 @@ LabelChart.defaultProps = {
     title: '',
     value: 0,
     type: '',
-    onclick: () => {}
+    onclick: () => { }
 }

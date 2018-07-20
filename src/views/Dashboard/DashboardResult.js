@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Card, CardBody, Col, Row } from 'reactstrap';
 import { BarChart, LineChart, PieChart, AreaChart, ComposedChart, LabelChart } from '../../components/index';
+import TableChart from '../../components/charts/TableChart';
 
 export default class DashboardResult extends Component {
 
@@ -11,10 +12,10 @@ export default class DashboardResult extends Component {
 
     componentDidMount() {
         const data = [
-            { name: 'www.site1.com', upload: 200, download: 200, total: 400 },
-            { name: 'www.site2.com', upload: 100, download: 300, total: 400 },
-            { name: 'www.site3.com', upload: 300, download: 200, total: 500 },
-            { name: 'www.site4.com', upload: 400, download: 100, total: 500 }
+            { name: 'www.site1.com', upload: 200, download: 200, total: 400, venda: 90 },
+            { name: 'www.site2.com', upload: 100, download: 300, total: 400, venda: 50 },
+            { name: 'www.site3.com', upload: 300, download: 200, total: 500, venda: 30 },
+            { name: 'www.site4.com', upload: 400, download: 100, total: 500, venda: 70 }
         ]
 
         const pie = [
@@ -36,7 +37,7 @@ export default class DashboardResult extends Component {
                 <Row>
                     <Col xs="12" sm="6" lg="3">
                         <Card>
-                            <CardBody className="pb-0">
+                            <CardBody>
                                 <LabelChart
                                     title={'Faturamento'}
                                     type={'currency'}
@@ -48,7 +49,7 @@ export default class DashboardResult extends Component {
 
                     <Col xs="12" sm="6" lg="3">
                         <Card>
-                            <CardBody className="pb-0">
+                            <CardBody>
                                 <LabelChart
                                     title={'EBITDA'}
                                     type={'currency'}
@@ -60,7 +61,7 @@ export default class DashboardResult extends Component {
 
                     <Col xs="12" sm="6" lg="3">
                         <Card>
-                            <CardBody className="pb-0">
+                            <CardBody>
                                 <LabelChart
                                     title={'Lucro Líquido(%)'}
                                     type={'percentage'}
@@ -72,7 +73,7 @@ export default class DashboardResult extends Component {
 
                     <Col xs="12" sm="6" lg="3">
                         <Card>
-                            <CardBody className="pb-0">
+                            <CardBody>
                                 <LabelChart
                                     title={'Lucro Bruto'}
                                     type={'currency'}
@@ -85,7 +86,7 @@ export default class DashboardResult extends Component {
                 <Row>
                     <Col xs="12" sm="6" lg="6">
                         <Card>
-                            <CardBody className="pb-0 pl-0" >
+                            <CardBody>
                                 <LineChart
                                     data={data}
                                     dataKey={'name'}
@@ -96,7 +97,7 @@ export default class DashboardResult extends Component {
                     </Col>
                     <Col xs="12" sm="6" lg="6">
                         <Card>
-                            <CardBody className="pb-0">
+                            <CardBody>
                                 <BarChart
                                     data={data}
                                     dataKey={'name'}
@@ -109,7 +110,7 @@ export default class DashboardResult extends Component {
                 <Row>
                     <Col xs="12" sm="6" lg="6">
                         <Card>
-                            <CardBody className="pb-0 pl-0" >
+                            <CardBody >
                                 <PieChart
                                     data={pie}
                                     options={[{ key: 'value' }]}
@@ -120,7 +121,7 @@ export default class DashboardResult extends Component {
                     </Col>
                     <Col xs="12" sm="6" lg="6">
                         <Card>
-                            <CardBody className="pb-0">
+                            <CardBody>
                                 <AreaChart
                                     data={data}
                                     dataKey={'name'}
@@ -134,7 +135,7 @@ export default class DashboardResult extends Component {
                 <Row>
                     <Col xs="12" sm="6" lg="6">
                         <Card>
-                            <CardBody className="pb-0 pl-0" >
+                            <CardBody >
                                 <ComposedChart
                                     data={data}
                                     dataKey={'name'}
@@ -149,14 +150,46 @@ export default class DashboardResult extends Component {
                     </Col>
                     <Col xs="12" sm="6" lg="6">
                         <Card>
-                            <CardBody className="pb-0">
-                            <ComposedChart
+                            <CardBody>
+                                {/*  <ComposedChart
                                     data={data}
                                     dataKey={'name'}
                                     options={[
                                         { key: 'total', type: 'bar' },
                                         { key: 'upload', type: 'line' },
                                         { key: 'download', type: 'line' }
+                                    ]}
+                                /> */}
+                                <TableChart
+                                    data={data}
+                                    columns={[
+                                        {
+                                            key: 'name',
+                                            name: 'NAME',
+                                            resizable: true
+                                        },
+                                        {
+                                            key: 'upload',
+                                            name: 'UPLOAD',
+                                            resizable: true
+                                        },
+                                        {
+                                            key: 'download',
+                                            name: 'DOWNLOAD',
+                                            resizable: true
+                                        },
+                                        {
+                                            key: 'total',
+                                            name: 'TOTAL',
+                                            resizable: true
+                                        },
+                                        {
+                                            key: 'venda',
+                                            name: 'VENDA',
+                                            format: 'percent',
+                                            resizable: true,
+                                            width: 200
+                                        }
                                     ]}
                                 />
                             </CardBody>
