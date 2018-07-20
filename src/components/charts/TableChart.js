@@ -24,9 +24,30 @@ class PercentCompleteFormatter extends React.Component {
 }
 
 export default class TableChart extends Component {
+    constructor() {
+        super();
+        this.state = { originalRows: [] }
+    }
+
+    handleGridSort = (sortColumn, sortDirection) => {
+        let { data } = this.props;
+        this.setState({originalRows: data});
+        const comparer = (a, b) => {
+            if (sortDirection === 'ASC') {
+                return (a[sortColumn] > b[sortColumn]) ? 1 : -1;
+            } else if (sortDirection === 'DESC') {
+                return (a[sortColumn] < b[sortColumn]) ? 1 : -1;
+            }
+        };
+
+        const newData = sortDirection === 'NONE' ? this.state.originalRows.slice(0) : data.sort(comparer);
+
+        data = newData;
+    };
+
 
     render() {
-        const { data, columns, handleGridSort } = this.props;
+        const { data, columns } = this.props;
 
         columns.forEach(col => {
             switch (col.format) {
@@ -49,7 +70,7 @@ export default class TableChart extends Component {
                     rowHeight={50}
                     minHeight={300}
                     minWidth={500}
-                    onGridSort={handleGridSort}
+                    onGridSort={this.handleGridSort}
                 />
             </Container>
         )

@@ -7,7 +7,7 @@ export default class DashboardResult extends Component {
 
     constructor() {
         super();
-        this.state = { data: [], pie: [], originalRows: [] };
+        this.state = { data: [], pie: [] };
     }
 
     componentDidMount() {
@@ -27,22 +27,8 @@ export default class DashboardResult extends Component {
             ]
         ]
 
-        this.setState({ data: data, pie: pie, originalRows: data });
+        this.setState({ data: data, pie: pie});
     }
-
-    handleGridSort = (sortColumn, sortDirection) => {
-        const comparer = (a, b) => {
-            if (sortDirection === 'ASC') {
-                return (a[sortColumn] > b[sortColumn]) ? 1 : -1;
-            } else if (sortDirection === 'DESC') {
-                return (a[sortColumn] < b[sortColumn]) ? 1 : -1;
-            }
-        };
-
-        const data = sortDirection === 'NONE' ? this.state.originalRows.slice(0) : this.state.data.sort(comparer);
-
-        this.setState({ data });
-    };
 
     render() {
         const { data, pie } = this.state;
@@ -176,7 +162,6 @@ export default class DashboardResult extends Component {
                                 /> */}
                                 <TableChart
                                     data={data}
-                                    handleGridSort={this.handleGridSort.bind(this)}
                                     columns={[
                                         {
                                             key: 'name',
@@ -194,7 +179,8 @@ export default class DashboardResult extends Component {
                                             key: 'download',
                                             name: 'DOWNLOAD',
                                             resizable: true,
-                                            sortable: true
+                                            sortable: true,
+                                            width: 128
                                         },
                                         {
                                             key: 'total',
