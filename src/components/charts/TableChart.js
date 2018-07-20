@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDataGrid from 'react-data-grid';
+import { Draggable } from 'react-data-grid-addons';
+
+const { Container } = Draggable;
 
 // Custom Formatter component
 class PercentCompleteFormatter extends React.Component {
@@ -16,14 +19,15 @@ class PercentCompleteFormatter extends React.Component {
                     {percentComplete}
                 </div>
             </div>
-            );
+        );
     }
 }
 
 export default class TableChart extends Component {
 
     render() {
-        const { data, columns } = this.props;
+        const { data, columns, handleGridSort } = this.props;
+
         columns.forEach(col => {
             switch (col.format) {
                 case 'percent':
@@ -34,17 +38,20 @@ export default class TableChart extends Component {
             }
         });
         return (
-            <ReactDataGrid
-                ref={node => this.grid = node}
-                enableCellSelect={true}
-                enableDragAndDrop={true}
-                columns={columns}
-                rowGetter={(index) => { return data[index] }}
-                rowsCount={data.length}
-                rowHeight={50}
-                minHeight={300}
-                minWidth={500}
-            />
+            <Container>
+                <ReactDataGrid
+                    ref={node => this.grid = node}
+                    enableCellSelect={true}
+                    enableDragAndDrop={true}
+                    columns={columns}
+                    rowGetter={(index) => { return data[index] }}
+                    rowsCount={data.length}
+                    rowHeight={50}
+                    minHeight={300}
+                    minWidth={500}
+                    onGridSort={handleGridSort}
+                />
+            </Container>
         )
     }
 }
