@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDataGrid from 'react-data-grid';
-import { Draggable } from 'react-data-grid-addons';
+import { Draggable, ToolsPanel } from 'react-data-grid-addons';
 
 const { Container } = Draggable;
+const { AdvancedToolbar, GroupedColumnsPanel } = ToolsPanel;
 
 // Custom Formatter component
 class PercentCompleteFormatter extends React.Component {
@@ -26,12 +27,12 @@ class PercentCompleteFormatter extends React.Component {
 export default class TableChart extends Component {
     constructor() {
         super();
-        this.state = { originalRows: [] }
+        this.state = { originalRows: [], groupBy: [], expandedRows: {} }
     }
 
     handleGridSort = (sortColumn, sortDirection) => {
         let { data } = this.props;
-        this.setState({originalRows: data});
+        this.setState({ originalRows: data });
         const comparer = (a, b) => {
             if (sortDirection === 'ASC') {
                 return (a[sortColumn] > b[sortColumn]) ? 1 : -1;
@@ -45,9 +46,42 @@ export default class TableChart extends Component {
         data = newData;
     };
 
+    onColumnGroupAdded = (colName) => {
+        const { columns } = this.props;
+        let columnGroups = this.state.groupBy.slice(0);
+        let activeColumn = columns.find((c) => c.key === colName)
+        let isNotInGroups = columnGroups.find((c) => activeColumn.key === c.name) == null;
+        if (isNotInGroups) {
+            columnGroups.push({ key: activeColumn.key, name: activeColumn.name });
+        }
+
+        this.setState({ groupBy: columnGroups });
+    };
+
+    onColumnGroupDeleted = (name) => {
+        let columnGroups = this.state.groupBy.filter(function (g) {
+            return typeof g === 'string' ? g !== name : g.key !== name;
+        });
+        this.setState({ groupBy: columnGroups });
+    };
+
+    onRowExpandToggle = ({ columnGroupName, name, shouldExpand }) => {
+        let expandedRows = Object.assign({}, this.state.expandedRows);
+        expandedRows[columnGroupName] = Object.assign({}, expandedRows[columnGroupName]);
+        expandedRows[columnGroupName][name] = { isExpanded: shouldExpand };
+        this.setState({ expandedRows: expandedRows });
+    };
+
+    renderToolbar() {
+        return (
+            <AdvancedToolbar>
+                <GroupedColumnsPanel groupBy={this.state.groupBy} onColumnGroupAdded={this.onColumnGroupAdded} onColumnGroupDeleted={this.onColumnGroupDeleted} />
+            </AdvancedToolbar>
+        );
+    }
 
     render() {
-        const { data, columns } = this.props;
+        const { data, columns, groupColumns } = this.props;
 
         columns.forEach(col => {
             switch (col.format) {
@@ -71,6 +105,8 @@ export default class TableChart extends Component {
                     minHeight={300}
                     minWidth={500}
                     onGridSort={this.handleGridSort}
+                    onRowExpandToggle={this.onRowExpandToggle}
+                    toolbar={(groupColumns ? this.renderToolbar() : '')}
                 />
             </Container>
         )
@@ -78,6 +114,11 @@ export default class TableChart extends Component {
 }
 
 TableChart.propTypes = {
-    data: PropTypes.array,
-    columns: PropTypes.array
+    data: PropTypes.array.isRequired,
+    columns: PropTypes.array.isRequired,
+    groupColumns: PropTypes.bool
+}
+
+TableChart.defaultProps = {
+    groupColumns: false
 }

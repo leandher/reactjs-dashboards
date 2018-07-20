@@ -26,12 +26,12 @@ export default class DashboardResult extends Component {
             ]
         ]
 
-        this.setState({ data: data, pie: pie});
+        this.setState({ data: data, pie: pie });
     }
 
     render() {
         const { data, pie } = this.state;
-        
+
         return (
             <div className="animated fadeIn">
                 <Row>
@@ -152,6 +152,7 @@ export default class DashboardResult extends Component {
                         <Card>
                             <CardBody>
                                 <TableChart
+                                    groupColumns
                                     data={data}
                                     columns={[
                                         {
@@ -176,7 +177,8 @@ export default class DashboardResult extends Component {
                                         {
                                             key: 'total',
                                             name: 'TOTAL',
-                                            resizable: true
+                                            resizable: true,
+                                            draggable: true
                                         },
                                         {
                                             key: 'venda',
